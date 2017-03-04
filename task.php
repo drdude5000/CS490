@@ -23,7 +23,8 @@ class task {
 		$this->text = $text;
 	}
 	
-	function validate_question(){
+	// Step 1 validation of an inserted task
+	function validate_task_s1(){
 		$floc = 'pdir/qlist.txt';
 		$qfile = fopen($floc, 'r');
 		$marr = json_decode(fread($qfile, filesize($floc)), 1);
@@ -47,14 +48,36 @@ class task {
 		}
 		
 		if($check == 2){
-			$wquest = $var['text'];
-			echo $wquest;
+			$text = $this->text;
+			$extemp = $template['text'];
+			
+			$count = substr_count($text, '[');
+			$excount = substr_count($extemp, '[');
+			if($count != $excount)
+				return 0;
+			
+			for($i = 0; $i < $count; $i++){
+				$left = strpos($text, '[');
+				$exleft = strpos($extemp, '[');
+				$right = strpos($text, ']');
+				$exright = strpos($extemp, ']');
+				$text = substr_replace($text, '', $left, $right - $left + 1);
+				$extemp = substr_replace($extemp, '', $exleft, $exright - $exleft + 1);
+			}
+			
+			if($text == $extemp)
+				return 1;
+			else 
+				return 0;
 		}
+		else
+			return 0;
 	}
 }
 
-$myquestion = new task();
-$myquestion->assimilate('statement', 0, 'Print the text: [Hello Poo] as output to the terminal.');
-print_r($myquestion);
+$mytask = new task();
+$mytask->assimilate('method', 0, 'Define a public static method named [calctededehis] with 2 [intededeeger] parameters. You may name the the parameters. The method must [redfdfturn] the [prodfdfduct] of the integers and it must be a/an [intedfdfger].');
+echo $mytask->validate_task_s1();
+
 
 ?>
