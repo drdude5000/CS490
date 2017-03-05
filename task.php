@@ -80,7 +80,6 @@ class task {
 		fclose($sfile);
 		$text = $this->text;
 		$ctemp;
-		$inpos;
 		$extract = array();
 		$count;
 		
@@ -88,18 +87,22 @@ class task {
 		for ($i = 0; $i <$count; $i++){
 			$left = strpos($text, '[');
 			$right = strpos($text, ']');
-			$substr = substr($string, $start);
+			$substr = substr($text, $left+1, $right - $left - 1);
 			$text = substr_replace($text, '', $left, $right - $left + 1);
+			array_push($extract, $substr);
 		}
 		
 		
 		if($this->category == 'statement' && $this->difficulty == 0){
 			$ctemp =  $marr[0];
-			$inpos = 20;
+			$this->ans = substr_replace($ctemp, $extract[0], 20, 0);
 			
 		}
-		
-		echo $ctemp;
+		elseif($this->category == 'statement' && $this->difficulty == 1){
+			$ctemp =  $marr[1];
+			$this->ans = substr_replace($ctemp, $extract[0].'('.$extract[1].','.$extract[2].');' , 0, 0);
+				
+		}
 	}
 	
 }

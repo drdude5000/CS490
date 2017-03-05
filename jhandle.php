@@ -9,9 +9,14 @@ $mytask->assimilate('statement', 0, 'Print the text: [Hello Poo] as output to th
 $mytask->validate_task_s1();
 $mytask->createSample();
 
-$jstr = jhandle::getTemplate(); 
+$myans = 'System.out.println("Hello Popppoo")';
 
+print("<pre>");
+print_r(jhandle::sgrade('statement', 0, $myans, $mytask));
+print("</pre>");
 /*
+
+$jstr = jhandle::getTemplate(); 
 $student_ans = 'System.out.println("Java\nin\nPHP");';
 
 $jout = substr_replace($jstr, $student_ans, $jstart, 0);
@@ -48,21 +53,62 @@ class jhandle{
 		return $jans;
 	}
 
+	public static function compileJava($ans){
+		$floc = 'pdir/o.java';
+		$jfile = fopen($floc, 'w');
+		fwrite($jfile, $ans);
+		fclose($jfile);
+		exec('javac '.$floc.' 2>&1', $err);
+		return $err;
+	}
+	
+	public static function runJava(){
+		$output;
+		exec('java -cp pdir o', $output);
+		return $output;
+	}
+	
 	public static function sgrade($cat, $diff, $ans, $task){
+		
 		if($cat == 'statement' && $diff == 0){
 			$jans = self::prepJava($ans, 0);
 			$score = self::sgrade_s0($ans, $task);
+			return $score;
 		}
-				
+		elseif($cat == 'statement' && $diff == 1){
+			$jans = self::prepJava($ans, 0);
+			$score = self::sgrade_s1($ans, $task);
+		}
 	}
 	
 	public static function sgrade_s0($ans, $task){
-		return 50;
+		$rans = self::prepJava($task->ans, 0);
+		$sans = self::prepJava($ans, 0);
+		
+		$rerr = self::compileJava($rans);
+		$rout = self::runJava();
+		
+		$serr = self::compileJava($sans);
+		$sout = self::runJava();
+		
+		$verbose = "Not Equal";
+		
+		if(trim($rout[0]) == trim($sout[0]))
+			$verbose = 'Equal';
+		
+		return $serr;
 	}
 	
+	public static function sgrade_s1($ans, $task){
+		$rans = self::prepJava($task->ans, 0);
+		$sans = self::prepJava($ans, 0);
+		
+		$rerr = self::compileJava($task->$ans);
+		$rout = self::runJava();
+		
+		
+		return 0;
+	}
 }
-
-
-
 
 ?>
