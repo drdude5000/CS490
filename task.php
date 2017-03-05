@@ -1,7 +1,6 @@
 <?php
 /* This php file will contain the task class. It will
- * also contain the methods needed to score a student's response to the 
- * task.
+ * also contain the methods needed to validate a professor's task.
  * Created By: Oscar Rodriguez
  */
 
@@ -73,11 +72,38 @@ class task {
 		else
 			return 0;
 	}
+	
+	function createSample(){
+		$floc = 'pdir/slist.txt';
+		$sfile = fopen($floc, 'r');
+		$marr = json_decode(fread($sfile, filesize($floc)), 1);
+		fclose($sfile);
+		$text = $this->text;
+		$ctemp;
+		$inpos;
+		$extract = array();
+		$count;
+		
+		$count = substr_count($text, '[');
+		for ($i = 0; $i <$count; $i++){
+			$left = strpos($text, '[');
+			$right = strpos($text, ']');
+			$substr = substr($string, $start);
+			$text = substr_replace($text, '', $left, $right - $left + 1);
+		}
+		
+		
+		if($this->category == 'statement' && $this->difficulty == 0){
+			$ctemp =  $marr[0];
+			$inpos = 20;
+			
+		}
+		
+		echo $ctemp;
+	}
+	
 }
 
-$mytask = new task();
-$mytask->assimilate('method', 0, 'Define a public static method named [calctededehis] with 2 [intededeeger] parameters. You may name the the parameters. The method must [redfdfturn] the [prodfdfduct] of the integers and it must be a/an [intedfdfger].');
-echo $mytask->validate_task_s1();
 
 
 ?>
