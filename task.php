@@ -17,7 +17,7 @@ class Task {
 	// Important words
 	public $words = array();
 	// Tester method for difficult questions
-	public $tester;
+	public $tester = array();
 	
 	
 	function assimilate($cat, $diff, $text){
@@ -105,7 +105,16 @@ class Task {
 		elseif($this->category == 'statement' && $this->difficulty == 1){
 			$ctemp =  $marr[1];
 			$this->ans = substr_replace($ctemp, $extract[0].'('.$extract[1].','.$extract[2].');' , 0, 0);
+			
+			array_push($this->tester , 'public static void '.$extract[0].'(String x0, String x1){System.out.println(x0 + x1);}');
+			array_push($this->tester, 'String '.$extract[1].' = "TEST";'.'String '.$extract[2].' = "TEST";');
 				
+		}
+		elseif($this->category == 'loop' && $this->difficulty ==1){
+			$tans = 'while ('.$extract[2].' < '.$extract[1].'){'.$extract[0].'();'.$extract[2].'++;}';
+			$this->ans = $tans;
+			array_push($this->tester, 'public static void '.$extract[0].'(){System.out.println("TEST");}');
+			array_push($this->tester, 'int '.$extract[2].' = 0;');
 		}
 		elseif($this->category == 'method' && $this->difficulty == 0){
 			$ctemp =  $marr[1];
@@ -126,7 +135,7 @@ class Task {
 			$tester=rtrim($tester, ',');
 			
 			$this->ans = substr_replace($ctemp, 'public static void '.$extract[0].'('."$methstr".'){ System.out.println('.$constr.');}', 0, 0);
-			$this->tester = $extract[0].'('.$tester.');';
+			array_push($this->tester, $extract[0].'('.$tester.');');
 			//print_r($this->ans);
 		
 		}

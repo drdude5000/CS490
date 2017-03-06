@@ -12,7 +12,7 @@ $tarr = json_decode($tarr, 1);
 fclose($dfile);
 
 $fstudent = new Student();
-$fstudent->input_answer('Hello Poo System.out');
+$fstudent->input_answer('public static void stringthis(String x0, String x1, String x2){ System.out.println(x0 + x1 + x2 );}');
 $fstudent->task = new Task();
 $fstudent->task->assimilate('method', 0, $tarr[6]['text']);
 $fstudent->task->validate_task_s1();
@@ -20,7 +20,7 @@ $fstudent->task->createsample();
 
 
 print("<pre>");
-jhandle::taskgrade($fstudent, $fstudent->task);
+jhandle::gradetask($fstudent, $fstudent->task);
 print_r($fstudent);
 print("</pre>");
 
@@ -41,8 +41,18 @@ class jhandle{
 			$jans = substr_replace($jtemplate, $ans, 54, 0);
 		}
 		elseif ($prepid == 1) {
-			$jans = substr_replace($jtemplate, $tester, 54, 0);
-			$jans = substr_replace($jans, $ans, 55 + strlen($tester), 0);
+			$jans = substr_replace($jtemplate, $tester[0], 54, 0);
+			$jans = substr_replace($jans, $ans, 55 + strlen($tester[0]), 0);
+		}
+		elseif ($prepid == 2) {
+			$jans = substr_replace($jtemplate, $ans, 54, 0);
+			$jans = substr_replace($jans, $tester[0], 55 + strlen($ans), 0);
+			$jans = substr_replace($jans, $tester[1], 54, 0);
+		}
+		elseif ($prepid == 3) {
+			$jans = substr_replace($jtemplate, $tester[1], 54, 0);
+			$jans = substr_replace($jans, $ans, 54 , 0);
+			$jans = substr_replace($jans, $tester[0], 54 + strlen($ans) + strlen($tester[1]), 0);
 		}
 		return $jans;
 	}
@@ -64,14 +74,37 @@ class jhandle{
 	
 		
 		
-	public static function  taskgrade($student, $task){
+	public static function  gradetask($student, $task){
+		$ptype = 0;
+		
+		
+		if($task->difficulty == 0){
+			if($task->category == 'method'){
+				$ptype = 1;
+			}
+		}
+		
+		if($task->difficulty == 1){
+			$ptype = 1;
+			if($task->category == 'statement' || $task->category == 'loop'){
+				$ptype = 2;
+			}
+		}
+		
+		
 		$grieve = array();
 		
-		$rans = self::prepJava($task->ans, 1, $task->tester);
-		$sans = self::prepJava($student->answer, 1, $task->tester);
+		$rans = self::prepJava($task->ans, $ptype, $task->tester);
+		$sans = self::prepJava($student->answer, $ptype, $task->tester);
 
 		$rerr = self::compileJava($rans);
-		$rout = self::runJava();
+		$rout = 0;
+		if(empty($rerr)){
+			$rout = self::runJava();
+		}
+		else{
+			$rout = array('ERROR');
+		}
 		
 		$serr = self::compileJava($sans);
 		$sout = 0;
@@ -88,13 +121,9 @@ class jhandle{
 			$score = 100;
 			array_push($grieve, 'Output Matches');
 			
-			if(strpos($student->answer, $task->words[0]) == 0){
+			if(substr_count($student->answer, $task->words[0]) == 0){
 				$score -= 10;
 				array_push($grieve, 'Keyword '.$task->words[0].' not found -10');
-			}
-			if(substr_count($student->answer, 'System.out') > 1){
-				$score -= 10;
-				array_push($grieve, 'Keyword not found -10');
 			}
 		}
 		elseif(!empty($serr)){
@@ -107,7 +136,7 @@ class jhandle{
 				$score += 10;
 				array_push($grieve, 'Keyword '.$task->words[0].' found +10');
 			}
-			if(strpos($student->answer, 'System.out') == 0){
+			if(strpos($student->answer, 'System.out') == 0 || strpos($student->answer, 'return') == 0){
 				$score -= 20;
 				array_push($grieve, 'Keyword not found -20');
 			}
