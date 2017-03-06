@@ -15,7 +15,7 @@ $fstudent->task->createsample();
 
 print("<pre>");
 jhandle::sgrade('method', 1, $fstudent, $fstudent->task);
-//print_r($fstudent);
+print_r($fstudent);
 print("</pre>");
 
 
@@ -160,26 +160,27 @@ class jhandle{
 		if(trim($rout[0]) == trim($sout[0]) && empty($serr)){
 			$score = 100;
 			array_push($grieve, 'Output Matches');
-			if(strpos($sans, $task->words[0]) == 0){
+			
+			if(strpos($student->answer, $task->words[0]) == 0){
 				$score -= 10;
-				array_push($grieve, 'Keyword not found -10');
+				array_push($grieve, 'Keyword '.$task->words[0].' not found -10');
 			}
-			if(substr_count($sans, 'System.out') > 1){
+			if(substr_count($student->answer, 'System.out') > 1){
 				$score -= 10;
 				array_push($grieve, 'Keyword not found -10');
 			}
 		}
 		elseif(!empty($serr)){
 			$score = 30;
-			if(strpos($sans, $task->words[0]) == 0){
+			if(strpos($student->answer, $task->words[0]) == 0){
 				$score -= 20;
-				array_push($grieve, 'Keyword not found -20');
+				array_push($grieve, 'Keyword '.$task->words[0].' not found -20');
 			}
 			else{
 				$score += 10;
-				array_push($grieve, 'Keyword found +10');
+				array_push($grieve, 'Keyword '.$task->words[0].' found +10');
 			}
-			if(strpos($sans, 'System.out') == 0){
+			if(strpos($student->answer, 'System.out') == 0){
 				$score -= 20;
 				array_push($grieve, 'Keyword not found -20');
 			}
@@ -200,7 +201,6 @@ class jhandle{
 		$grieve = array_merge($serr, $grieve);
 		$student->grievance = $grieve;
 		$student->grade = $score;
-		print_r($sout);
 	}
 }
 
