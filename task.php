@@ -4,7 +4,7 @@
  * Created By: Oscar Rodriguez
  */
 
-class task {
+class Task {
 
 	// The category the question pertains to.
 	public $category;
@@ -16,6 +16,8 @@ class task {
 	public $ans;
 	// Important words
 	public $words = array();
+	// Tester method for difficult questions
+	public $tester;
 	
 	
 	function assimilate($cat, $diff, $text){
@@ -104,6 +106,29 @@ class task {
 			$ctemp =  $marr[1];
 			$this->ans = substr_replace($ctemp, $extract[0].'('.$extract[1].','.$extract[2].');' , 0, 0);
 				
+		}
+		elseif($this->category == 'method' && $this->difficulty == 1){
+			$ctemp =  $marr[1];
+			
+			$methstr = '';
+			$constr = '';
+			$tester = '';
+			for ($i = 0; $i < $extract[1]; $i++){
+				$methstr .= 'String x'."$i".', ';
+				$constr .= 'x'."$i".' + ';
+				$tester .= '"TEST", ';
+			}
+			$methstr=rtrim($methstr);
+			$methstr=rtrim($methstr, ',');
+			$constr=rtrim($constr);
+			$constr=rtrim($constr, '+');
+			$tester=rtrim($tester);
+			$tester=rtrim($tester, ',');
+			
+			$this->ans = substr_replace($ctemp, 'public static void '.$extract[0].'('."$methstr".'){ System.out.println('.$constr.');}', 0, 0);
+			$this->tester = $extract[0].'('.$tester.');';
+			//print_r($this->ans);
+		
 		}
 	}
 	

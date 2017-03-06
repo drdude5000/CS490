@@ -43,6 +43,7 @@ else{
 		
 	}
 	if($_POST['flag'] == 'task' && $_POST['mode'] == 'receive'){
+		//Question Tempates
 		$floc = 'pdir/qlist.txt';
 		$dfile = fopen($floc, 'r');
 		$marr = fread($dfile, filesize($floc));
