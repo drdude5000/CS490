@@ -9,30 +9,13 @@ $mytask->assimilate('statement', 0, 'Print the text: [Hello Poo] as output to th
 $mytask->validate_task_s1();
 $mytask->createSample();
 
-$myans = 'System.out.println("Hello Popppoo")';
+$myans = 'Hello Poo System.out';
 
 print("<pre>");
 print_r(jhandle::sgrade('statement', 0, $myans, $mytask));
+//print_r($mytask->words);
 print("</pre>");
-/*
 
-$jstr = jhandle::getTemplate(); 
-$student_ans = 'System.out.println("Java\nin\nPHP");';
-
-$jout = substr_replace($jstr, $student_ans, $jstart, 0);
-
-$floc2 = 'pdir/o.java';
-$jfile2 = fopen($floc2, 'w');
-fwrite($jfile2, $jout);
-fclose($jfile2);
-
-exec('javac '.$floc2.' 2>&1', $err);
-exec('java -cp pdir o', $output);
-print('<pre>');
-print(jhandle::sgrade('statement', '0', 'nada', $mytask));
-print('</pre>');
-
-*/
 
 class jhandle{
 	public static function getTemplate(){
@@ -79,9 +62,15 @@ class jhandle{
 			$jans = self::prepJava($ans, 0);
 			$score = self::sgrade_s1($ans, $task);
 		}
+		elseif($cat == 'method' && $diff == 1){
+			$jans = self::prepJava($ans, 0);
+			$score = self::sgrade_s1($ans, $task);
+		}
 	}
 	
 	public static function sgrade_s0($ans, $task){
+		$grieve = array();
+		
 		$rans = self::prepJava($task->ans, 0);
 		$sans = self::prepJava($ans, 0);
 		
@@ -89,14 +78,53 @@ class jhandle{
 		$rout = self::runJava();
 		
 		$serr = self::compileJava($sans);
-		$sout = self::runJava();
+		$sout = 0;
+		if(empty($serr))
+			$sout = self::runJava();
+		else 
+			$sout = array('ERROR');
 		
-		$verbose = "Not Equal";
+		$score = 0;
 		
-		if(trim($rout[0]) == trim($sout[0]))
-			$verbose = 'Equal';
+		if(trim($rout[0]) == trim($sout[0]) && empty($serr)){
+			$score = 100;
+			array_push($grieve, 'Output Matches');
+			if(strpos($sans, $task->words[0]) == 0){
+				$score -= 10;
+				array_push($grieve, 'Keyword not found -10');
+			}
+			if(substr_count($sans, 'System.out') > 1){
+				$score -= 10;
+				array_push($grieve, 'Keyword not found -10');
+			}
+		}
+		elseif(!empty($serr)){
+			$score = 30;
+			if(strpos($sans, $task->words[0]) == 0){
+				$score -= 20;
+				array_push($grieve, 'Keyword not found -20');
+			}
+			else{
+				$score += 10;
+				array_push($grieve, 'Keyword found +10');
+			}
+			if(strpos($sans, 'System.out') == 0){
+				$score -= 20;
+				array_push($grieve, 'Keyword not found -20');
+			}
+			else{
+				$score += 10;
+				array_push($grieve, 'Keyword found +10');
+			}
+		}
+			
+		if(empty($ans))
+			$score = 0;
 		
-		return $serr;
+		if($score < 0)
+			$score = 0;
+		
+		return $score;
 	}
 	
 	public static function sgrade_s1($ans, $task){

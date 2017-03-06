@@ -38,9 +38,17 @@ else{
 		}
 		else
 			array_push($rout, 0);
-		
-			
+				
 		echo json_encode($rout);
+		
+	}
+	if($_POST['flag'] == 'task' && $_POST['mode'] == 'receive'){
+		$floc = 'pdir/qlist.txt';
+		$dfile = fopen($floc, 'r');
+		$marr = fread($dfile, filesize($floc));
+		fclose($dfile);
+		
+		echo $marr;
 		
 	}
 }

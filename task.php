@@ -14,6 +14,8 @@ class task {
 	public $text;
 	// Sample Answer
 	public $ans;
+	// Important words
+	public $words = array();
 	
 	
 	function assimilate($cat, $diff, $text){
@@ -92,7 +94,7 @@ class task {
 			array_push($extract, $substr);
 		}
 		
-		
+		$this->words = $extract;
 		if($this->category == 'statement' && $this->difficulty == 0){
 			$ctemp =  $marr[0];
 			$this->ans = substr_replace($ctemp, $extract[0], 20, 0);
