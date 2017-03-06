@@ -107,7 +107,7 @@ class Task {
 			$this->ans = substr_replace($ctemp, $extract[0].'('.$extract[1].','.$extract[2].');' , 0, 0);
 				
 		}
-		elseif($this->category == 'method' && $this->difficulty == 1){
+		elseif($this->category == 'method' && $this->difficulty == 0){
 			$ctemp =  $marr[1];
 			
 			$methstr = '';
