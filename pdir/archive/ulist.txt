@@ -1,3 +1,0 @@
-[{"ucid":"profx","pass":123,"utype":1},
-{"ucid":"kenny","pass":"pizza","utype":0},
-{"ucid":"oscar","pass":"poo","utype":0}]
