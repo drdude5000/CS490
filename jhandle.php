@@ -7,7 +7,7 @@
 include 'task.php';
 include 'student.php';
 
-$floc = 'pdir/qlist.txt';
+$floc = 'pdir/taskList.txt';
 $dfile = fopen($floc, 'r');
 $tarr = fread($dfile, filesize($floc));
 $tarr = json_decode($tarr, 1);

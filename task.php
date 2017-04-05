@@ -30,7 +30,7 @@ class Task {
 	
 	// Step 1 validation of an inserted task
 	function validate_task_s1(){
-		$floc = 'pdir/qlist.txt';
+		$floc = 'pdir/taskList.txt';
 		$qfile = fopen($floc, 'r');
 		$marr = json_decode(fread($qfile, filesize($floc)), 1);
 		
