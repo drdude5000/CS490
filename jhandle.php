@@ -24,7 +24,7 @@ class jhandle{
 		$args = "";
 		
 		if(empty($prep->methodname)){
-			$meth = "meth";
+			$meth = "meth2";
 		}
 		else{
 			$meth = $prep->methodname;
@@ -32,7 +32,7 @@ class jhandle{
 		
 		$count = 0;
 		foreach ($prep->argtypes as $type){
-			$args .= $prep->tinput[$c]. ',';
+			$args .= $prep->tinput[$testnum][$count]. ',';
 			$count += 1;
 		}
 		$args = rtrim($args, ',');
