@@ -1,8 +1,2 @@
-[{"category":"statement","difficulty":0,"text":"Print the text: [Hello World] as output to the terminal."},
-{"category":"statement","difficulty":1,"text":"Invoke the method named [getthat] and use the 2 variable arguments: [x],[y]."},
-{"category":"loop","difficulty":0,"text":"Write a for loop that prints [Hello] as output to the terminal [6] times. You may name your own counter variable. Separate each print out with a [newline character]."},
-{"category":"loop","difficulty":1,"text":"Write a while loop that invokes the [getthat] method with no arguments [12] times. You must use the counter variable [i] which has been assigned the value of  0."},
-{"category":"array","difficulty":0,"text":"Declare a single dimensional array named [arr] that can contain [20] [String] values."},
-{"category":"array","difficulty":1,"text":"Use a loop to initialize the array [arr] with [integer] values."},
-{"category":"method","difficulty":0,"text":"Define a public static method named [stringthis] with [3] string parameters. You may name the parameters.  The method must NOT return a value. The method must print out the concatention of the the strings entered as arguments."},
-{"category":"method","difficulty":1,"text":"Define a public static method named [calcthis] with 2 [integer] parameters. You may name the the parameters. The method must [return] the [product] of the integers and it must be a/an [integer]."}]
+[{"text":"Write a Java method to find the smallest number among three numbers.","category":"relational","difficulty":0,"returntype":"double","methodname":"","argnames":[],"argtypes":["double","double","double"],"numtests":2,"input":[[1,2,3],[3,4,5]],"output":[1,3]},
+{"text":"Write a Java method to find the greatest number among three numbers.","category":"relational","difficulty":0,"returntype":"double","methodname":"Poop","argnames":[],"argtypes":["double","double","double"],"numtests":2,"input":[[1,2,3],[3,4,5]],"output":[3,5]}]
