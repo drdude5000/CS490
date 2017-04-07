@@ -24,8 +24,11 @@ class jhandle{
 		$args = "";
 		
 		if(empty($prep->methodname)){
-			$meth = "meth2";
-		}
+			$meth = substr($ans, strpos($ans, $prep->returntype), strpos($ans, '(') - strpos($ans, $prep->returntype));
+			$meth = substr($meth, strpos($meth, ' '));
+			$meth = trim($meth);
+			$prep->methodname = $meth;
+;		}
 		else{
 			$meth = $prep->methodname;
 		}
@@ -64,17 +67,26 @@ class jhandle{
 	public static function  gradetask($student){
 		
 		$grieve = array();
-
-		$sans = self::prepJava($student->answer, $student->task, 0);
-
-		$serr = self::compileJava($sans);
+		$sans = '';
+		$serr = '';
 		$sout = 0;
 		
-		if(empty($serr)){
-			$sout = self::runJava();
-		}
-		else{
-			$sout = array('ERROR');
+		$numtests = $student->task->numtests;
+		$count = 0;
+		
+		while($count < $numtests){	
+			$sans = self::prepJava($student->answer, $student->task, $count);
+	
+			$serr = self::compileJava($sans);
+			$sout = 0;
+			
+			if(empty($serr)){
+				$sout = self::runJava();
+			}
+			else{
+				$sout = array('ERROR');
+			}
+			$count += 1;
 		}
 		
 		$score = 0;

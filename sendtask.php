@@ -1,7 +1,7 @@
 <?php
 
 $backURL = "http://afsaccess3.njit.edu/~em244/CS490/addQuestion.php";
-$ch2 = curl_init($backURL);
+$ch = curl_init($backURL);
 /*
 $marr =array('category' => $_POST['cat'], 
 		'difficulty' => $_POST['diff'], 
@@ -14,10 +14,10 @@ $marr =array('category' => $_POST['cat'],
 		'tcAns' => $_POST['tcAns'],
 		);
 */
-curl_setopt($ch2, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch2, CURLOPT_POST, true);
-curl_setopt($ch2, CURLOPT_POSTFIELDS, $_POST);
-$result = json_decode(curl_exec($ch2), 1);
-curl_close($ch2);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, $_POST);
+$result = curl_exec($ch);
+curl_close($ch);
 
 ?>

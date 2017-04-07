@@ -15,14 +15,14 @@ else{
 	
 	if($_POST['flag'] == 'login'){
 		$backURL = "http://afsaccess3.njit.edu/~em244/CS490/login.php";
-		$ch2 = curl_init($backURL);
+		$ch = curl_init($backURL);
 		
 		$marr =array('ucid' => $_POST['ucid'], 'pass' => $_POST['pass']);
-		curl_setopt($ch2, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($ch2, CURLOPT_POST, true);
-		curl_setopt($ch2, CURLOPT_POSTFIELDS, $marr);
-		$result = curl_exec($ch2);
-		curl_close($ch2);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_POST, true);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $marr);
+		$result = curl_exec($ch);
+		curl_close($ch);
 		echo $result;
 
 	}

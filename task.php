@@ -29,7 +29,6 @@ class Task {
 	
 	public $toutput = array();
 	
-	
 		
 	function assimilate($taskdata){
 		$this->category = $taskdata["category"];
