@@ -8,6 +8,7 @@ $marr = fread($dfile, filesize($floc));
 $marr = json_decode($marr, 1);
 fclose($dfile);
 
-echo $marr;
-
+print("<pre>");
+print_r($marr);
+print("</pre>");
 ?>

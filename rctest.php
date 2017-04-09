@@ -2,8 +2,18 @@
 
 include 'jhandle.php';
 
-// Java Handling
+function commasep($string){
+	$marr = explode(",", $string);
+	return $marr;
+}
 
+print("<pre>");
+print_r(commasep("This,is,bull"));
+print("</pre>");
+
+
+// Java Handling
+/*
 $floc = 'pdir/taskList.txt';
 $dfile = fopen($floc, 'r');
 $tarr = fread($dfile, filesize($floc));

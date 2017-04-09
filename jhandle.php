@@ -7,6 +7,8 @@
  */
 include 'task.php';
 include 'student.php';
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 class jhandle{
 	public static function getTemplate(){
@@ -93,8 +95,8 @@ class jhandle{
 			
 			$count += 1;
 		}
-		
-		$score = 100 * ($perfect / $numtests);
+		if ($numtests != 0)
+			$score = 100 * ($perfect / $numtests);
 		
 		if(empty($student->answer)){
 			$score = 0;
@@ -145,7 +147,8 @@ class jhandle{
 				else 
 					$part = substr($part, 0, strpos($part, ')'));
 				$part = trim($part);
-				$temp = substr($temp, strpos($temp, $part));
+				if(!empty($part))
+					$temp = substr($temp, strpos($temp, $part));
 				array_push($args, $part);
 			}
 			

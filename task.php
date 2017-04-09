@@ -34,16 +34,21 @@ class Task {
 	function assimilate($taskdata){
 		$this->category = $taskdata["category"];
 		$this->difficulty = $taskdata["difficulty"];
-		$this->text = $taskdata["text"];
-		$this->returntype = $taskdata["returntype"];
-		$this->methodname = $taskdata["methodname"];
-		$this->argtypes = $taskdata["argtypes"];
-		$this->argnames = $taskdata["argnames"];
-		$this->numtests = $taskdata["numtests"];
-		$this->tinput = $taskdata["input"];
-		$this->toutput = $taskdata["output"];
+		$this->text = $taskdata["question"];
+		$this->returntype = $taskdata["returnType"];
+		$this->methodname = $taskdata["methodName"];
+		$this->argtypes = self::commasep($taskdata["argType"]);
+		$this->argnames = self::commasep($taskdata["argName"]);
+		$this->tinput = self::commasep($taskdata["tests"]["testcase"]);
+		$this->toutput = self::commasep($taskdata["tests"]["testanswer"]);
+		$this->numtests = count($this->toutput);
+		$this->tinput = array($this->tinput);
 	}
 	
+	function commasep($string){
+		$marr = explode(",", $string);
+		return $marr;
+	}
 	
 }
 

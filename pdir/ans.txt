@@ -1,9 +1,9 @@
-public static double meth(double ass1, double ass2, double ass3){
-  double smallz = ass1;
-  if (smallz > ass2)
+public static double meth(double ass01, double ass02, double ass03){
+  double smallz = ass01;
+  if (smallz > ass02)
     smallz = ass2;
 
-  if (smallz > ass3)
-    smallz = ass3;
+  if (smallz > ass03)
+    smallz = ass03;
   return smallz;
 }
