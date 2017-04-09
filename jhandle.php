@@ -23,16 +23,10 @@ class jhandle{
 		$meth= "";
 		$args = "";
 		
-		if(empty($prep->methodname)){
-			$meth = substr($ans, strpos($ans, $prep->returntype), strpos($ans, '(') - strpos($ans, $prep->returntype));
-			$meth = substr($meth, strpos($meth, ' '));
-			$meth = trim($meth);
-			$prep->methodname = $meth;
-;		}
-		else{
-			$meth = $prep->methodname;
-		}
-		
+		$meth = substr($ans, strpos($ans, $prep->returntype), strpos($ans, '(') - strpos($ans, $prep->returntype));
+		$meth = substr($meth, strpos($meth, ' '));
+		$meth = trim($meth);
+
 		$count = 0;
 		foreach ($prep->argtypes as $type){
 			$args .= $prep->tinput[$testnum][$count]. ',';
@@ -64,7 +58,7 @@ class jhandle{
 	
 		
 		
-	public static function  gradetask($student){
+	public static function  gradeTask($student){
 		
 		$grieve = array();
 		$sans = '';
@@ -73,6 +67,7 @@ class jhandle{
 		
 		$numtests = $student->task->numtests;
 		$count = 0;
+		$perfect = 0;
 		
 		while($count < $numtests){	
 			$sans = self::prepJava($student->answer, $student->task, $count);
@@ -82,14 +77,24 @@ class jhandle{
 			
 			if(empty($serr)){
 				$sout = self::runJava();
+				if ($sout[0] == $student->task->toutput[$count]){
+					array_push($grieve, "Perfect Match: " .$sout[0]);
+					$perfect += 1;
+				}
+				else{
+					array_push($grieve, "Mismatch: " .$sout[0]);
+				}						
 			}
 			else{
 				$sout = array('ERROR');
+				array_push($grieve, $serr);
 			}
+
+			
 			$count += 1;
 		}
 		
-		$score = 0;
+		$score = 100 * ($perfect / $numtests);
 		
 		if(empty($student->answer)){
 			$score = 0;
@@ -99,10 +104,64 @@ class jhandle{
 			$score = 0;
 		}
 		
-		$grieve = array_merge($serr, $grieve);
+		self::bonusCheck($student); 
 		$student->grievance = $grieve;
 		$student->grade = $score;
 		
+	}
+	public static function bonusCheck($student){
+		$bonus = array();
+		$ans = $student->answer;
+		$cat = $student->task->category;
+		$meth = substr($ans, strpos($ans, $student->task->returntype), strpos($ans, '(') - strpos($ans, $student->task->returntype));
+		$meth = substr($meth, strpos($meth, ' '));
+		$meth = trim($meth);
+		
+		$args = array();		
+		$temp = ''; 
+		
+		if(!empty($student->task->methodname)){
+			if($student->task->methodname == $meth){
+				array_push($bonus, array(1, 'Method name match'));
+			}
+			else{
+				array_push($bonus, array(0, 'Method name mismatch'));
+			}
+		}
+		else{
+			array_push($bonus, array(-1, 'No method name enforced'));
+		}
+		// Confusing String Manipulation
+		if(!empty($student->task->argnames)){
+			$args = array();
+			$temp = substr($ans, strpos($ans, '('), strpos($ans, ')') - strpos($ans, '(')+ 1);
+			
+			foreach($student->task->argtypes as $type){				
+				$part = substr($temp, strpos($temp, $type) + strlen($type));
+				$part = trim($part);
+				$comma = substr($part, 0, strpos($part, ','));
+				if(!empty($comma))					
+					$part = substr($part, 0, strpos($part, ','));
+				else 
+					$part = substr($part, 0, strpos($part, ')'));
+				$part = trim($part);
+				$temp = substr($temp, strpos($temp, $part));
+				array_push($args, $part);
+			}
+			
+			
+			if($student->task->argnames == $args){
+				array_push($bonus, array(1, 'Argument names match'));
+			}
+			else{
+				array_push($bonus, array(0, 'Argument names mismatch'));
+			}
+		}
+		else{
+			array_push($bonus, array(-1, 'No arg names enforced'));
+		}
+		array_push($bonus, $args);
+		$student->bonuscheck = $bonus;
 	}
 }
 

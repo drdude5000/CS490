@@ -6,6 +6,7 @@ class Student{
 	public $grievance = array();
 	public $task;
 	public $grade;
+	public $bonuscheck = array();
 	
 	function input_answer($ans){
 		$this->answer = $ans;

@@ -28,6 +28,7 @@ class Task {
 	public $tinput = array();
 	
 	public $toutput = array();
+
 	
 		
 	function assimilate($taskdata){
