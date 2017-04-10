@@ -1,5 +1,5 @@
 <?php
-$backURL = "https://web.njit.edu/~em244/CS490/getTestQuestions.php";
+$backURL = "https://web.njit.edu/~em244/CS490/getTakenTests.php";
 $ch = curl_init($backURL);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_POST, true);
