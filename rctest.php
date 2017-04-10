@@ -2,18 +2,8 @@
 
 include 'jhandle.php';
 
-function commasep($string){
-	$marr = explode(",", $string);
-	return $marr;
-}
-
-print("<pre>");
-print_r(commasep("This,is,bull"));
-print("</pre>");
-
-
 // Java Handling
-/*
+
 $floc = 'pdir/taskList.txt';
 $dfile = fopen($floc, 'r');
 $tarr = fread($dfile, filesize($floc));
@@ -28,7 +18,7 @@ fclose($dfile2);
 $fstudent = new Student();
 $fstudent->input_answer($ans);
 $fstudent->task = new Task();
-$fstudent->task->assimilate($tarr[0]);
+$fstudent->task->localmerge($tarr[2]);
 
 
 print("<pre>");

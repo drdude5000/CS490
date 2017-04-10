@@ -50,6 +50,19 @@ class Task {
 		return $marr;
 	}
 	
+	function localmerge($taskdata){
+		$this->category = $taskdata["category"];
+		$this->difficulty = $taskdata["difficulty"];
+		$this->text = $taskdata["text"];
+		$this->returntype = $taskdata["returntype"];
+		$this->methodname = $taskdata["methodname"];
+		$this->argtypes = $taskdata["argtypes"];
+		$this->argnames = $taskdata["argnames"];
+		$this->tinput = $taskdata["input"];
+		$this->toutput = $taskdata["output"];
+		$this->numtests = $taskdata["numtests"];
+	}
+	
 }
 
 ?>

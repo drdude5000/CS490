@@ -61,7 +61,7 @@ class jhandle{
 		
 		
 	public static function  gradeTask($student){
-		
+		$score = 0;
 		$grieve = array();
 		$sans = '';
 		$serr = '';
@@ -71,9 +71,8 @@ class jhandle{
 		$count = 0;
 		$perfect = 0;
 		
-		while($count < $numtests){	
+		while($count < $numtests){
 			$sans = self::prepJava($student->answer, $student->task, $count);
-	
 			$serr = self::compileJava($sans);
 			$sout = 0;
 			

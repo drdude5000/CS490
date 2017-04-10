@@ -55,32 +55,25 @@ for ($i = 0; $i < count($taskinfoarr); $i++){
 	$fstudent->task->assimilate($taskinfoarr[$i]);	
 	jhandle::gradetask($fstudent);
 	$totalgrade += $fstudent->grade;
-	array_push($studentarr, $fstudent);
+	array_push($studentarr, $fstudent->grievance);
 }
-$totalgrade = $totalgrade / count($studentanswers);
+$jsonData = array();
+if (count($studentanswers) != 0){
+	$totalgrade = $totalgrade / count($studentanswers);
 
-
-print('<pre>');
-echo "MID";
-echo "<br>";
-print("SCORE: " . $totalgrade);
-echo "<br>";
-$cnt = 1;
-foreach($studentarr as $stud){
-	echo "<br>";
-	echo "Student Info Task #" . $cnt;
-	echo "<br>";
-	print_r($stud);
-	$cnt += 1;
+	$jsonData = array(	'studentName' => $alldata[0],
+						'testName' => $alldata[1],
+						'grade' => $totalgrade,
+						'grievance' => json_encode($studentarr)		
+	);
 }
-print('<pre>');
-/*
-$backURL = "http://afsaccess3.njit.edu/~em244/CS490/getGradedAnswers.php";
+
+$backURL = "http://afsaccess3.njit.edu/~em244/CS490/addGrade.php";
 $ch = curl_init($backURL);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_POST, true);
-curl_setopt($ch, CURLOPT_POSTFIELDS, $_POST);
+curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
 $result = curl_exec($ch);
 curl_close($ch);
-*/
+
 ?>
