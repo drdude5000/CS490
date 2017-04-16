@@ -3,7 +3,8 @@
 	task.php
   	Created By: Oscar Rodriguez
  */
-
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 class Task {
 
 	// The category the question pertains to.
@@ -38,11 +39,19 @@ class Task {
 		$this->returntype = $taskdata["returnType"];
 		$this->methodname = $taskdata["methodName"];
 		$this->argtypes = self::commasep($taskdata["argType"]);
-		$this->argnames = self::commasep($taskdata["argName"]);
-		$this->tinput = self::commasep($taskdata["tests"]["testcase"]);
-		$this->toutput = self::commasep($taskdata["tests"]["testanswer"]);
+		$this->argnames = self::commasep($taskdata["argName"]);	
+		$this->toutput = self::commasep($taskdata["tests"][0]['testanswer']);
 		$this->numtests = count($this->toutput);
+		$this->tinput = self::commasep($taskdata["tests"][0]['testcase']);
 		$this->tinput = array($this->tinput);
+		
+		/*
+		$cnt = 0;
+		foreach($taskdata["tests"] as $temp){
+			if($temp[$cnt] == 'testanswer')
+				
+		}
+		*/
 	}
 	
 	function commasep($string){

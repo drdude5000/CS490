@@ -48,8 +48,8 @@ if(!empty($alldata)){
 $bonusinfo = array();
 $studentarr = array();
 $totalgrade = 0;
+$fstudent = new Student();
 for ($i = 0; $i < count($taskinfoarr); $i++){
-	$fstudent = new Student();
 	$fstudent->input_answer($studentanswers[$i]);
 	$fstudent->task = new Task();
 	$fstudent->task->assimilate($taskinfoarr[$i]);	
@@ -76,4 +76,9 @@ curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
 $result = curl_exec($ch);
 curl_close($ch);
 
+/*
+print('<pre>');
+print_r($fstudent);
+print('</pre>');
+*/
 ?>

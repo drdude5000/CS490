@@ -79,11 +79,11 @@ class jhandle{
 			if(empty($serr)){
 				$sout = self::runJava();
 				if ($sout[0] == $student->task->toutput[$count]){
-					array_push($grieve, "Perfect Match: " .$sout[0]);
+					array_push($grieve, "Correct Output: " .$sout[0]);
 					$perfect += 1;
 				}
 				else{
-					array_push($grieve, "Mismatch: " .$sout[0]);
+					array_push($grieve, "Wrong Output: " .$sout[0]);
 				}						
 			}
 			else{
@@ -105,9 +105,10 @@ class jhandle{
 			$score = 0;
 		}
 		
-		self::bonusCheck($student); 
+		
 		$student->grievance = $grieve;
 		$student->grade = $score;
+		self::bonusCheck($student);
 		
 	}
 	public static function bonusCheck($student){
@@ -123,14 +124,14 @@ class jhandle{
 		
 		if(!empty($student->task->methodname)){
 			if($student->task->methodname == $meth){
-				array_push($bonus, array(1, 'Method name match'));
+				array_push($bonus, 'Method name match');
 			}
 			else{
-				array_push($bonus, array(0, 'Method name mismatch'));
+				array_push($bonus, 'Method name mismatch');
 			}
 		}
 		else{
-			array_push($bonus, array(-1, 'No method name enforced'));
+			array_push($bonus, 'No method name enforced');
 		}
 		// Confusing String Manipulation
 		if(!empty($student->task->argnames)){
@@ -153,15 +154,18 @@ class jhandle{
 			
 			
 			if($student->task->argnames == $args){
-				array_push($bonus, array(1, 'Argument names match'));
+				array_push($bonus, 'Argument names match');
 			}
 			else{
-				array_push($bonus, array(0, 'Argument names mismatch'));
+				array_push($bonus,'Argument names mismatch');
 			}
 		}
 		else{
-			array_push($bonus, array(-1, 'No arg names enforced'));
+			array_push($bonus, 'No arg names enforced');
 		}
+		
+	
+		$student->grievance = array_merge($bonus, $student->grievance);
 		array_push($bonus, $args);
 		$student->bonuscheck = $bonus;
 	}
