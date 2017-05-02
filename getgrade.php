@@ -5,7 +5,7 @@ $testData = array('studentName' => 'oscar');
 $ch = curl_init($backURL);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_POST, true);
-curl_setopt($ch, CURLOPT_POSTFIELDS, $_POST);
+curl_setopt($ch, CURLOPT_POSTFIELDS, $testData);
 $result = curl_exec($ch);
 curl_close($ch);
 
