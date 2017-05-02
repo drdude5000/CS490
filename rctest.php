@@ -26,8 +26,6 @@ jhandle::gradetask($fstudent);
 print_r($fstudent);
 print("</pre>");
 
-
-
 // Curling
 /*
  $backURL = "http://afsaccess3.njit.edu/~em244/CS490/login.php";
