@@ -1,6 +1,6 @@
 <?php
 /*
-receiveallstudents.php
+receivealltakentests.php
 Return list of all tests students took.
 Created By: Oscar Rodriguez
 */

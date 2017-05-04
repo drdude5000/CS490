@@ -1,4 +1,9 @@
 <?php
+/*
+receiveexamsstudenttook.php
+Return list of all tests ONE student took.
+Created By: Oscar Rodriguez
+*/
 
 $backURL = "http://afsaccess2.njit.edu/~em244/CS490/getAvailableTests.php";
 $ch = curl_init($backURL);

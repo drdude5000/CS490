@@ -1,9 +1,11 @@
 <?php
-/*Posts
- *sName
- *testName
- *[0][1] are Student Answers
- */
+/*
+Posts
+sName
+testName
+[0][1] are Student Answers
+*/
+
 include 'jhandle.php';
 
 $studentanswers = array();
