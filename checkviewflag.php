@@ -1,7 +1,7 @@
 <?php
 /*
 checkviewflag.php
-Make the exam available for a student to view.
+Check the flag of an exam for student to view
 Created By: Oscar Rodriguez
 */
 

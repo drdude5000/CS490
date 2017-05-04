@@ -53,7 +53,7 @@ class jhandle{
 	}
 	
 	public static function runJava(){
-		$output;
+		$output = 0;
 		exec('java -cp pdir o', $output);
 		return $output;
 	}

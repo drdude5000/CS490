@@ -1,6 +1,11 @@
 <?php
+/*
+receiveallstudents.php
+Return list of students.
+Created By: Oscar Rodriguez
+*/
 
-$backURL = "https://web.njit.edu/~em244/CS490/getAllStudents.php";
+$backURL = "http://afsaccess2.njit.edu/~em244/CS490/getAllStudents.php";
 $ch = curl_init($backURL);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 $result = curl_exec($ch);
