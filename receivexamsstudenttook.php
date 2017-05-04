@@ -1,6 +1,6 @@
 <?php
 /*
-receiveexamsstudenttook.php
+receivexamsstudenttook.php
 Return list of all tests ONE student took.
 Created By: Oscar Rodriguez
 */
