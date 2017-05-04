@@ -1,4 +1,9 @@
 <?php
+/*
+receivealltasks.php
+Return list of all questions/tasks.
+Created By: Oscar Rodriguez
+*/
 
 $backURL = "http://afsaccess2.njit.edu/~em244/CS490/getAllQuestions.php";
 $ch = curl_init($backURL);

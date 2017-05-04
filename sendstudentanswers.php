@@ -22,7 +22,7 @@ $taskinfoarr = array();
 if(!empty($alldata)){
 	//Get Task List
 	$examData = array('exam'=> $alldata[1]);
-	$backURL = "http://afsaccess3.njit.edu/~em244/CS490/getTestQuestions.php";
+	$backURL = "http://afsaccess2.njit.edu/~em244/CS490/getTestQuestions.php";
 	$ch = curl_init($backURL);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	curl_setopt($ch, CURLOPT_POST, true);
@@ -34,7 +34,7 @@ if(!empty($alldata)){
 	foreach($taskarr as $minortask){
 		$questionData = array("question"=> $minortask);
 		
-		$backURL = "http://afsaccess3.njit.edu/~em244/CS490/getQuestionRow.php";
+		$backURL = "http://afsaccess2.njit.edu/~em244/CS490/getQuestionRow.php";
 		$ch = curl_init($backURL);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_POST, true);
