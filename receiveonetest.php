@@ -1,6 +1,6 @@
 <?php
 /*
-receiveallstudents.php
+receiveonetest.php
 Return single test.
 Created By: Oscar Rodriguez
 */
