@@ -1,7 +1,7 @@
 <?php
 /*
 receiveallstudents.php
-Return list of students.
+Return list of all students.
 Created By: Oscar Rodriguez
 */
 
