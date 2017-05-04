@@ -2,7 +2,7 @@
 
 include 'jhandle.php';
 
-// Java Handling TTT
+// Java Handling
 
 $floc = 'pdir/taskList.txt';
 $dfile = fopen($floc, 'r');
