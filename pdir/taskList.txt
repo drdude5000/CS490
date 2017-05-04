@@ -1,3 +1,0 @@
-[{"text":"Write a Java method to find the smallest number among three numbers.","category":"relational","difficulty":0,"returntype":"double","methodname":"","argnames":["ass1","ass2","ass3"],"argtypes":["double","double","double"],"numtests":2,"input":[[1,2,3],[5,4,3]],"output":[1,3]},
-{"text":"Write a Java method to find the greatest number among three numbers.","category":"relational","difficulty":0,"returntype":"double","methodname":"Poop","argnames":[],"argtypes":["double","double","double"],"numtests":2,"input":[[1,2,3],[3,4,5]],"output":[3,5]},
-{"text":"Write a Java method that returns True.","category":"boolean","difficulty":0,"returntype":"boolean","methodname":"Boop","argnames":[],"argtypes":[],"numtests":2,"input":[],"output":["True","True"]}]

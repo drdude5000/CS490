@@ -1,7 +1,11 @@
 <?php
+/*
+deletetasks.php
+Delete questons/tasks associated to a professor from the database.
+Created By: Oscar Rodriguez
+*/
 
-$backURL = "http://afsaccess3.njit.edu/~em244/CS490/deleteQuestions.php";
-
+$backURL = "http://afsaccess2.njit.edu/~em244/CS490/deleteQuestions.php";
 $jsonData = array('prof' => 'profx'); 
 
 $ch = curl_init($backURL);

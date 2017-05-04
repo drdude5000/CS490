@@ -1,7 +1,6 @@
 <?php
 
 $backURL = "http://afsaccess3.njit.edu/~em244/CS490/getAvailableTests.php";
-$testData = array('studentName' => 'oscar');
 $ch = curl_init($backURL);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_POST, true);

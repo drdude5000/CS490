@@ -1,6 +1,11 @@
 <?php
+/*
+checkviewflag.php
+Make the exam available for a student to view.
+Created By: Oscar Rodriguez
+*/
 
-$backURL = "https://web.njit.edu/~em244/CS490/changeExamStatus.php";
+$backURL = "http://afsaccess2.njit.edu/~em244/CS490/changeExamStatus.php";
 $ch = curl_init($backURL);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_POST, true);

@@ -1,5 +1,4 @@
 <?php
-$testData = array('studentName' => 'oscar');
 $backURL = "https://web.njit.edu/~em244/CS490/getTakenTests.php";
 $ch = curl_init($backURL);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

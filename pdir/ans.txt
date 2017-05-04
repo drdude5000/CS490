@@ -1,3 +1,0 @@
-public static double meth(double x01, double x02, double x03){
-  return x01;
-}
