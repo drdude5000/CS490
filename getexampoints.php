@@ -6,7 +6,7 @@ Created By: Oscar Rodriguez
 */
 
 $backURL = "http://afsaccess2.njit.edu/~em244/CS490/getScore.php";
-$jsonData = array('exam' => 'Real');
+$jsonData = array('exam' => 'QQ');
 
 $ch = curl_init($backURL);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
