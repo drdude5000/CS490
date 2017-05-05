@@ -42,8 +42,7 @@ class Task {
 		$this->argnames = self::commasep($taskdata["argName"]);	
 		$this->toutput = self::commasep($taskdata["tests"][0]['testanswer']);
 		$this->numtests = count($this->toutput);
-		$this->tinput = self::commasep($taskdata["tests"][0]['testcase']);
-		$this->tinput = array($this->tinput);
+		$this->tinput = self::inputarray($taskdata["tests"]);
 		
 		/*
 		$cnt = 0;
@@ -53,7 +52,14 @@ class Task {
 		}
 		*/
 	}
-	
+	function inputarray($arr){
+	    $rarr = array();
+	    for($i = 0; $i < count($arr); $i++){
+	        $temp = self::commasep(arr[$i]['testcase']);
+            array_push($rarr, $temp);
+        }
+        return $rarr;
+    }
 	function commasep($string){
 		$marr = explode(",", $string);
 		return $marr;

@@ -26,6 +26,7 @@ for($i = 2; $i < count($alldata); $i++){
 
 $examData = array();
 $taskarr = array();
+$scorearr = array();
 $taskinfoarr = array();
 if(!empty($alldata)){
 	//Get Task List
@@ -51,6 +52,15 @@ if(!empty($alldata)){
 		curl_close($ch);
 		array_push($taskinfoarr, $result);
 	}
+
+	//Get Score Data
+    $scoreURL = "http://afsaccess2.njit.edu/~or32/xr/getexampoints.php";
+    $ch = curl_init($scoreURL);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $examData);
+    $scorearr = json_decode(curl_exec($ch), 1);
+    curl_close($ch);
 }
 
 $bonusinfo = array();
@@ -76,7 +86,7 @@ if (count($studentanswers) != 0){
 	);
 }
 
-$backURL = "http://afsaccess3.njit.edu/~em244/CS490/addGrade.php";
+$backURL = "http://afsaccess2.njit.edu/~em244/CS490/addGrade.php";
 $ch = curl_init($backURL);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_POST, true);
@@ -84,9 +94,9 @@ curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
 $result = curl_exec($ch);
 curl_close($ch);
 
-/*
+
 print('<pre>');
 print_r($fstudent);
 print('</pre>');
-*/
+
 ?>
