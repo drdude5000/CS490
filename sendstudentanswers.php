@@ -62,26 +62,42 @@ if(!empty($alldata)){
     $scorearr = json_decode(curl_exec($ch), 1);
     curl_close($ch);
 }
-
+$wholescore = 0;
+foreach ($j as $scorearr){
+    $wholescore += $j;
+}
 $bonusinfo = array();
 $studentarr = array();
-$totalgrade = 0;
+$totalgrade = array();
 $fstudent = new Student();
 for ($i = 0; $i < count($taskinfoarr); $i++){
 	$fstudent->input_answer($studentanswers[$i]);
 	$fstudent->task = new Task();
 	$fstudent->task->assimilate($taskinfoarr[$i]);	
 	jhandle::gradetask($fstudent);
-	$totalgrade += $fstudent->grade;
+	array_push($totalgrade,  $fstudent->grade);
 	array_push($studentarr, $fstudent->grievance);
 }
 $jsonData = array();
+$returngrade = 0;
 if (count($studentanswers) != 0){
-	$totalgrade = $totalgrade / count($studentanswers);
+	if($wholescore == 0){
+	    $gsum = 0;
+	    foreach($i as $totalgrade){
+	        $gsum += $i;
+        }
+        $returngrade = $gsum / count($studentanswers);
+    }
+    else{
+	    $gcount = 0;
+        foreach($i as $totalgrade){
+            $returngrade += ($i * ($scorearr[$gcount] / $wholescore));
+        }
+    }
 
 	$jsonData = array(	'studentName' => $alldata[0],
 						'testName' => $alldata[1],
-						'grade' => $totalgrade,
+						'grade' => $returngrade,
 						'grievance' => json_encode($studentarr)
 	);
 }

@@ -12,6 +12,7 @@ class Student{
 	public $grade;
 	public $bonuscheck = array();
 	public $checkcases = array();
+	public $totalcases = array();
 	
 	function input_answer($ans){
 		$this->answer = $ans;
