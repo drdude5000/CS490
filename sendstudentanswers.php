@@ -90,8 +90,8 @@ if (count($studentanswers) != 0){
     }
     else{
 	    $gcount = 0;
-        foreach($i as $totalgrade){
-            $returngrade += ($i * ($scorearr[$gcount] / $wholescore));
+        foreach($totalgrade as $k){
+            $returngrade += ($k * ($scorearr[$gcount] / $wholescore));
         }
     }
 
