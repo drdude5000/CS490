@@ -63,7 +63,7 @@ if(!empty($alldata)){
     curl_close($ch);
 }
 $wholescore = 0;
-foreach ($j as $scorearr){
+foreach ($scorearr as $j){
     $wholescore += $j;
 }
 $bonusinfo = array();
@@ -83,8 +83,8 @@ $returngrade = 0;
 if (count($studentanswers) != 0){
 	if($wholescore == 0){
 	    $gsum = 0;
-	    foreach($i as $totalgrade){
-	        $gsum += $i;
+	    foreach($totalgrade as $k){
+	        $gsum += $k;
         }
         $returngrade = $gsum / count($studentanswers);
     }
