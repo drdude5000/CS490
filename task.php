@@ -63,7 +63,7 @@ class Task {
     function outputarray($arr){
         $rarr = array();
         for($i = 0; $i < count($arr); $i++){
-            $temp = self::commasep($arr[$i]['testanswer']);
+            $temp = $arr[$i]['testanswer'];
             array_push($rarr, $temp);
         }
         return $rarr;
