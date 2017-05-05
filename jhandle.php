@@ -70,7 +70,8 @@ class jhandle{
 		$numtests = $student->task->numtests;
 		$count = 0;
 		$perfect = 0;
-		
+
+		array_push($student->checkcases, 0);
 		while($count < $numtests){
 			$sans = self::prepJava($student->answer, $student->task, $count);
 			$serr = self::compileJava($sans);
@@ -81,6 +82,7 @@ class jhandle{
 				if ($sout[0] == $student->task->toutput[$count]){
 					array_push($grieve, "Correct Output: " .$sout[0]);
 					$perfect += 1;
+
 				}
 				else{
 					array_push($grieve, "Wrong Output: " .$sout[0]);
@@ -94,6 +96,7 @@ class jhandle{
 			
 			$count += 1;
 		}
+        $student->checkcases[count($student->checkcases) - 1] = $perfect;
 		if ($numtests != 0)
 			$score = 100 * ($perfect / $numtests);
 		
@@ -163,8 +166,7 @@ class jhandle{
 		else{
 			array_push($bonus, 'No arg names enforced');
 		}
-		
-	
+
 		$student->grievance = array_merge($bonus, $student->grievance);
 		array_push($bonus, $args);
 		$student->bonuscheck = $bonus;
