@@ -40,7 +40,7 @@ class Task {
 		$this->methodname = $taskdata["methodName"];
 		$this->argtypes = self::commasep($taskdata["argType"]);
 		$this->argnames = self::commasep($taskdata["argName"]);	
-		$this->toutput = self::commasep($taskdata["tests"][0]['testanswer']);
+		$this->toutput = self::outputarray($taskdata["tests"]);
 		$this->numtests = count($this->toutput);
 		$this->tinput = self::inputarray($taskdata["tests"]);
 		
@@ -55,7 +55,15 @@ class Task {
 	function inputarray($arr){
 	    $rarr = array();
 	    for($i = 0; $i < count($arr); $i++){
-	        $temp = self::commasep(arr[$i]['testcase']);
+	        $temp = self::commasep($arr[$i]['testcase']);
+            array_push($rarr, $temp);
+        }
+        return $rarr;
+    }
+    function outputarray($arr){
+        $rarr = array();
+        for($i = 0; $i < count($arr); $i++){
+            $temp = self::commasep($arr[$i]['testanswer']);
             array_push($rarr, $temp);
         }
         return $rarr;
