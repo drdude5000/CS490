@@ -82,7 +82,8 @@ if (count($studentanswers) != 0){
 	$jsonData = array(	'studentName' => $alldata[0],
 						'testName' => $alldata[1],
 						'grade' => $totalgrade,
-						'grievance' => json_encode($studentarr)		
+						'grievance' => json_encode($studentarr),
+                        'showcase' => $fstudent->checkcases
 	);
 }
 
