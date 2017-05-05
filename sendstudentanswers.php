@@ -96,7 +96,7 @@ curl_close($ch);
 
 
 print('<pre>');
-print_r($fstudent);
+print_r($jsonData);
 print('</pre>');
 
 ?>
