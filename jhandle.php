@@ -82,12 +82,12 @@ class jhandle{
 			if(empty($serr)){
 				$sout = self::runJava();
 				if ($sout[0] == $student->task->toutput[$count]){
-					array_push($grieve, "Correct Output: " .$sout[0]);
+					array_push($grieve, "Correct Output: " .$sout[0] . ' -> Student Output: ' . $student->task->toutput[$count]);
 					$perfect += 1;
 
 				}
 				else{
-					array_push($grieve, "Wrong Output: " .$sout[0]);
+                    array_push($grieve, "Correct Output: " .$sout[0] . ' -> Student Output: ' . $student->task->toutput[$count]);
 				}						
 			}
 			else{
@@ -177,9 +177,9 @@ class jhandle{
             array_push($bonus, 'All test cases passed');
         }
 		else{
-            array_push($bonus, 'Number of test cases failed: '. $current);
+            array_push($bonus, 'Number of test cases failed: '. $student->task->numtests - $current);
         }
-        
+
 		$student->grievance = array_merge($bonus, $student->grievance);
 		array_push($bonus, $args);
 		$student->bonuscheck = $bonus;
