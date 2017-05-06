@@ -39,7 +39,11 @@ class Task {
 		$this->returntype = $taskdata["returnType"];
 		$this->methodname = $taskdata["methodName"];
 		$this->argtypes = self::commasep($taskdata["argType"]);
-		$this->argnames = self::commasep($taskdata["argName"]);	
+		$this->argnames = self::commasep($taskdata["argName"]);
+		if (count($this->argnames) == 0){
+            $this->argnames = NULL;
+        }
+
 		$this->toutput = self::outputarray($taskdata["tests"]);
 		$this->numtests = count($this->toutput);
 		$this->tinput = self::inputarray($taskdata["tests"]);
