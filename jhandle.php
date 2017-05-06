@@ -31,7 +31,9 @@ class jhandle{
 
 		$count = 0;
 		foreach ($prep->argtypes as $type){
-			$args .= $prep->tinput[$testnum][$count]. ',';
+		    if (isset($prep->tinput[$testnum][$count])){
+                $args .= $prep->tinput[$testnum][$count]. ',';
+            }
 			$count += 1;
 		}
 		$args = rtrim($args, ',');
