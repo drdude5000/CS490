@@ -179,8 +179,7 @@ class jhandle{
 		else{
             array_push($bonus, 'Number of test cases failed: '. $current);
         }
-
-        print_r($student->task);
+        
 		$student->grievance = array_merge($bonus, $student->grievance);
 		array_push($bonus, $args);
 		$student->bonuscheck = $bonus;
