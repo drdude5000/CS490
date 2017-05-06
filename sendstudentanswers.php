@@ -123,7 +123,7 @@ $jsonData = array(
 );
 
 
-$backURL = "http://afsaccess2.njit.edu/~em244/CS490/getPointsEarned.php";
+$backURL = "http://afsaccess2.njit.edu/~em244/CS490/setPointsEarned.php";
 $ch = curl_init($backURL);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_POST, true);
