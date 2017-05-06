@@ -174,6 +174,7 @@ class jhandle{
 		$current = $student->checkcases[count($student->checkcases) - 1];
         array_push($bonus, 'Number of test cases passed: ' .$current . '/' . $student->task->numtests);
 
+        array_push($student->points, $student->grade);
 		$student->grievance = array_merge($bonus, $student->grievance);
 		array_push($bonus, $args);
 		$student->bonuscheck = $bonus;

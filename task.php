@@ -40,6 +40,7 @@ class Task {
 		$this->methodname = $taskdata["methodName"];
 		$this->argtypes = self::commasep($taskdata["argType"]);
 		$this->argnames = self::commasep($taskdata["argName"]);
+
 		if (count($this->argnames) == 1){
             if (empty($this->argnames[0])) {
                 $this->argnames = array();
@@ -49,14 +50,7 @@ class Task {
 		$this->toutput = self::outputarray($taskdata["tests"]);
 		$this->numtests = count($this->toutput);
 		$this->tinput = self::inputarray($taskdata["tests"]);
-		
-		/*
-		$cnt = 0;
-		foreach($taskdata["tests"] as $temp){
-			if($temp[$cnt] == 'testanswer')
-				
-		}
-		*/
+
 	}
 	function inputarray($arr){
 	    $rarr = array();
