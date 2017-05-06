@@ -111,7 +111,7 @@ $result = curl_exec($ch);
 curl_close($ch);
 
 $pearned = '';
-foreach ($fstudent as $i){
+foreach ($fstudent->points as $i){
     $pearned .= $i . ',';
 }
 $pearned = trim($pearned, ',');
