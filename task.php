@@ -5,8 +5,6 @@ Task structure
 Created By: Oscar Rodriguez
 */
 
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
 class Task {
 
 	// The category the question pertains to.
