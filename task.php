@@ -40,8 +40,10 @@ class Task {
 		$this->methodname = $taskdata["methodName"];
 		$this->argtypes = self::commasep($taskdata["argType"]);
 		$this->argnames = self::commasep($taskdata["argName"]);
-		if (count($this->argnames) == 0){
-            $this->argnames = array();
+		if (count($this->argnames) == 1){
+            if (empty($this->argnames[0])) {
+                $this->argnames = array();
+            }
         }
 
 		$this->toutput = self::outputarray($taskdata["tests"]);
