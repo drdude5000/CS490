@@ -132,7 +132,8 @@ class jhandle{
 				array_push($bonus, 'Method name match');
 			}
 			else{
-				array_push($bonus, 'Method name mismatch');
+				array_push($bonus, 'Method name mismatch -10%');
+				$student->grade *= .90;
 			}
 		}
 		else{
@@ -162,12 +163,23 @@ class jhandle{
 				array_push($bonus, 'Argument names match');
 			}
 			else{
-				array_push($bonus,'Argument names mismatch');
+				array_push($bonus,'Argument names mismatch -10%');
+                $student->grade *= .90;
 			}
 		}
 		else{
 			array_push($bonus, 'No arg names enforced');
 		}
+
+		$current = $student->checkcases[count($student->checkcases) - 1];
+
+		if($current - $student->task->numtests == 0){
+            array_push($bonus, 'All test cases passed');
+        }
+		else{
+            array_push($bonus, 'Number of test cases failed: '. $current);
+        }
+
 
 		$student->grievance = array_merge($bonus, $student->grievance);
 		array_push($bonus, $args);
