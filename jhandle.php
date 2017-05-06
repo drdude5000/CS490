@@ -172,13 +172,7 @@ class jhandle{
 		}
 
 		$current = $student->checkcases[count($student->checkcases) - 1];
-
-		if($current - $student->task->numtests == 0){
-            array_push($bonus, 'All test cases passed');
-        }
-		else{
-            array_push($bonus, 'Number of test cases failed: '. $student->task->numtests - $current);
-        }
+        array_push($bonus, 'Number of test cases passed: ' .$current . '/' . $student->task->numtests);
 
 		$student->grievance = array_merge($bonus, $student->grievance);
 		array_push($bonus, $args);
